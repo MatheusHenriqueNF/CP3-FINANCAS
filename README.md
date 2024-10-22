@@ -1,4 +1,4 @@
-# MPC-Finan-as
+# MPC-Finanas
 
 Integrantes: 
 
