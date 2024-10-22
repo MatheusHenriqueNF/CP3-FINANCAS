@@ -2,6 +2,8 @@
 
 #Estruturas de Dados: Utilize listas para armazenar as transações, onde cada transação é um dicionário contendo tipo (receita ou despesa), valor, categoria, e data. Dicionários podem ser usados para categorizar as transações e calcular totais por categoria.
 
+print("Olá, mundo!")
+
 def transacaoEntrada():
     pass
 
