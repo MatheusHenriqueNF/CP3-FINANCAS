@@ -74,9 +74,22 @@ def adicionar_transacao():
             print("Erro: Você não digitou um número válido.")
     return valorInicial
 
-    
 def removerTransacao(valor):
-     pass
+    if not transacoes:
+        print("Nenhuma transação para remover.")
+        return
+
+    print("Transações atuais: ")
+    for i, transacao in range(transacoes):
+        print(f"{i+1}. {transacao}")
+
+    indice = int(input("Informe o número da transação que deseja remover: "))
+    if indice <= 0 && indice < len(transacoes):
+        transacao_removida = transacoes.pop(indice)
+        print(f"Transação removida: {transacao_removida}")
+    else:
+        print("Número errado")
+
 
 def main():
     valorTransacao = adicionar_transacao()
