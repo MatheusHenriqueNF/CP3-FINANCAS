@@ -30,7 +30,7 @@ def transacaoEntrada():
     
 
 def transacaoSaida():
-    pass
+     print("Olá, mundo")
 
 def saldoAtual():
     pass
