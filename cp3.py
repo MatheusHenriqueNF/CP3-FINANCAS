@@ -18,6 +18,7 @@ def adicionar_transacao():
         while True:
             try:
                 valorInicial = float(input("Qual o valor inicial da sua conta? "))
+                transacoes.append(valorInicial)
                 if valorInicial < 0:
                     print("Valor inicial inválido. Informe um valor positivo.")
                 else:
@@ -50,15 +51,19 @@ def adicionar_transacao():
                     else:
                         valorInicial += valor
                         print(f"Receita adicionada. Novo saldo: {valorInicial}\nReceita inserida foi de: {valor} {descricao} na data {data}")
-                        transacoes.append(valorInicial)
+                        transacoes.append(["RECEITA",valorInicial, valor, descricao, data])
+                        print(transacoes) #remover essa linha depois
 
                 elif respostaUsuario == 2:
                     valor = float(input("Qual o valor da despesa? "))
+                    descricao = input("Digite a sua descrição para o valor: ")
                     if valor < 0:
                         print("Valor inválido. Informe um valor positivo.")
                     elif valorInicial >= valor:
                         valorInicial -= valor
                         print(f"Despesa adicionada. Novo saldo: {valorInicial}\nDespesa inserida foi de: {valor} {descricao} na data {data}")
+                        transacoes.append(["DESPESA",valorInicial, valor, descricao, data])
+                        print(transacoes) #remover essa linha depois
                     
                     else:
                         print("Saldo insuficiente. Transação recusada!")
@@ -74,28 +79,31 @@ def adicionar_transacao():
 
         except ValueError:
             print("Erro: Você não digitou um número válido.")
-    return valorInicial
+    return transacoes
+        
 
-def removerTransacao(valor):
-    if not transacoes:
-        print("Nenhuma transação para remover.")
-        return
 
-    print("Transações atuais: ")
-    for i, transacao in range(transacoes):
-        print(f"{i+1}. {transacao}")
+# def removerTransacao(valor):
 
-    indice = int(input("Informe o número da transação que deseja remover: "))
-    if indice <= 0 < len(transacoes):
-        transacao_removida = transacoes.pop(indice)
-        print(f"Transação removida: {transacao_removida}")
-    else:
-        print("Número errado")
+#     if not valor:
+#         print("Nenhuma transação para remover.")
+#         return
+
+#     print("Transações atuais: ")
+#     for i, transacao in range(valor):
+#         print(f"{i+1}. {transacao}")
+
+#     indice = int(input("Informe o número da transação que deseja remover: "))
+#     if indice <= 0 < len(valor):
+#         transacao_removida = valor.pop(indice)
+#         print(f"Transação removida: {transacao_removida}")
+#     else:
+#         print("Número errado")
 
 
 def main():
     valorTransacao = adicionar_transacao()
-    remover = removerTransacao(valorTransacao)
+    # remover = removerTransacao(valorTransacao)
 
 if __name__ == "__main__":
     main()
