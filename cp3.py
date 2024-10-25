@@ -4,6 +4,11 @@
 #um dicionário contendo tipo (receita ou despesa), valor, categoria, e data.
 #Dicionários podem ser usados para categorizar as transações e calcular totais por categoria.
 
+from datetime import datetime
+
+# Obtendo a data e hora atuais
+agora = datetime.now()
+data = agora.strftime("%d/%m/%Y %H:%M:%S")
 
 def adicionar_transacao():
     respostaInicial = input("Deseja começar com um valor inicial na sua conta? (sim/não) ")
@@ -32,14 +37,18 @@ def adicionar_transacao():
 
             if inserirValor == 1:
                 respostaUsuario = int(input("Você deseja inserir uma: 1 [RECEITA] ou 2 [DESPESA]? "))
+                
 
                 if respostaUsuario == 1:
                     valor = float(input("Qual o valor da receita? "))
+                    descricao = input("Digite a sua descrição para o valor: ")
+                   
+
                     if valor < 0:
                         print("Valor inválido. Informe um valor positivo.")
                     else:
                         valorInicial += valor
-                        print(f"Receita adicionada. Novo saldo: {valorInicial}")
+                        print(f"Receita adicionada. Novo saldo: {valorInicial}\nReceita inserida foi de: {valor} {descricao} na data {data}")
 
                 elif respostaUsuario == 2:
                     valor = float(input("Qual o valor da despesa? "))
@@ -47,7 +56,7 @@ def adicionar_transacao():
                         print("Valor inválido. Informe um valor positivo.")
                     elif valorInicial >= valor:
                         valorInicial -= valor
-                        print(f"Despesa adicionada. Novo saldo: {valorInicial}")
+                        print(f"Despesa adicionada. Novo saldo: {valorInicial}\nDespesa inserida foi de: {valor} {descricao} na data {data}")
                     
                     else:
                         print("Saldo insuficiente. Transação recusada!")
@@ -67,7 +76,7 @@ def adicionar_transacao():
 
     
 def removerTransacao(valor):
-     
+     pass
 
 def main():
     valorTransacao = adicionar_transacao()
