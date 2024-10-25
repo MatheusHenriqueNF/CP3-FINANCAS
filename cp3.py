@@ -12,6 +12,7 @@ data = agora.strftime("%d/%m/%Y %H:%M:%S")
 
 def adicionar_transacao():
     respostaInicial = input("Deseja começar com um valor inicial na sua conta? (sim/não) ")
+    transacoes = []
 
     if respostaInicial.lower() == 'sim':
         while True:
@@ -49,6 +50,7 @@ def adicionar_transacao():
                     else:
                         valorInicial += valor
                         print(f"Receita adicionada. Novo saldo: {valorInicial}\nReceita inserida foi de: {valor} {descricao} na data {data}")
+                        transacoes.append(valorInicial)
 
                 elif respostaUsuario == 2:
                     valor = float(input("Qual o valor da despesa? "))
@@ -84,7 +86,7 @@ def removerTransacao(valor):
         print(f"{i+1}. {transacao}")
 
     indice = int(input("Informe o número da transação que deseja remover: "))
-    if indice <= 0 && indice < len(transacoes):
+    if indice <= 0 < len(transacoes):
         transacao_removida = transacoes.pop(indice)
         print(f"Transação removida: {transacao_removida}")
     else:
