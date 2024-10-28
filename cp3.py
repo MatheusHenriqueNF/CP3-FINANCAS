@@ -126,6 +126,25 @@ def visualizar_relatorio(transacoes):
     return subtransacaoList
 
 def obter_insights(subtransacaoList):
+    # Implementar insights aqui
+    # Por exemplo, calcular a média de receitas e despesas, quais categorias são mais comuns, etc.
+    # Implemente as funções necessárias para calcular insights e retornar os resultados.
+    # A função não precisa retornar nada, apenas imprimir os resultados.
+    
+    # ## faça para eu
+    # print("Média de receitas:", sum(transacao[2] for transacao in transacoes if transacao[0] == "RECEITA") / len(transacoes))
+    # print("Média de despesas:", sum(transacao[2] for transacao in transacoes if transacao[0] == "DESPESA") / len(transacoes))
+    # print("Categorias mais comuns:")
+    # categorias = {}
+    # for transacao in transacoes:
+    #     categoria = transacao[3]
+    #     if categoria in categorias:
+    #         categorias[categoria] += 1
+    #     else:
+    #         categorias[categoria] = 1
+    # for categoria, quantidade in categorias.items():
+    #     print(f"{categoria}: {quantidade}")
+    # return None # Remover essa linha depois quando implementar os insights.
     pass
 
 def main():
