@@ -111,10 +111,24 @@ def remover_transacao(transacoes):
     return transacoes
 
 
+def visualizar_relatorio(transacoes):
+    print("Relatório de transações:")
+    subtransacaoList = transacoes[-1]
+    print(f"Saldo final: {subtransacaoList[-4]}")    
+    print("Receitas:")
+    for transacao in transacoes:
+        if transacao[0] == "RECEITA":
+            print(f"{transacao[4]} - {transacao[2]} {transacao[3]}")
+    print("Despesas:")
+    for transacao in transacoes:
+        if transacao[0] == "DESPESA":
+            print(f"{transacao[4]} - {transacao[2]} {transacao[3]}")
+    return transacoes
 
 def main():
     valorTransacao = adicionar_transacao()
     remover = remover_transacao(valorTransacao)
+    relatorio = visualizar_relatorio(remover)
 
 if __name__ == "__main__":
     main()
