@@ -123,12 +123,16 @@ def visualizar_relatorio(transacoes):
     for transacao in transacoes:
         if transacao[0] == "DESPESA":
             print(f"{transacao[4]} - {transacao[2]} {transacao[3]}")
-    return transacoes
+    return subtransacaoList
+
+def obter_insights(subtransacaoList):
+    pass
 
 def main():
     valorTransacao = adicionar_transacao()
     remover = remover_transacao(valorTransacao)
     relatorio = visualizar_relatorio(remover)
+    insight = obter_insights(relatorio)
 
 if __name__ == "__main__":
     main()
