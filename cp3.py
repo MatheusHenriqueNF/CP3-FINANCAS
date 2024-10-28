@@ -108,7 +108,10 @@ def remover_transacao(transacoes):
         if continuar.lower() == 'não':
             print("Encerrando a remoção de transações.")
             break
-            
+    return transacoes
+
+
+
 def main():
     valorTransacao = adicionar_transacao()
     remover = remover_transacao(valorTransacao)
