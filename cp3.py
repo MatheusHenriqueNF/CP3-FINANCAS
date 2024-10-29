@@ -10,10 +10,46 @@ from datetime import datetime
 agora = datetime.now()
 data = agora.strftime("%d/%m/%Y %H:%M:%S")
 
-def adicionar_transacao():
-    respostaInicial = input("Deseja começar com um valor inicial na sua conta? (sim/não) ")
-    transacoes = []
+def inicio():
+    opcao = input("\nBEM-VINDO! \n1 - Adicionar Transação\n2 - Carregar Dados\nO que você deseja?: ")
 
+    while opcao.isnumeric() == False:
+        opcao = input("\nOpção inválida, por favor, escolha entre as seguintes opções\n1 - Adicionar Transação\n2 - Carregar Dados\nO que você deseja?: ")
+
+    if opcao == "1":
+        adicionar_transacao()
+    elif opcao == "2":
+        carregar_dados()        
+
+
+    # pass
+
+def menu_principal():
+    opcao = input("\nBEM-VINDO! \n1 - Adicionar Transação\n2 - Remover Transação\n3 - Visualizar Relatório\n4 - Obter Insights\n5 - Salvar Dados\n6 - Carregar Dados\nO que você deseja?: ")
+
+    while opcao.isnumeric() == False:
+        opcao = input("\nOpção inválida, por favor, escolha entre as seguintes opções\n1 - Adicionar Transação\n2 - Remover Transação\n3 - Visualizar Relatório\n4 - Obter Insights\n5 - Salvar Dados\n6 - Carregar Dados\nO que você deseja?: ")
+
+    if opcao == "1":
+        adicionar_transacao()
+    elif opcao == "2":
+        remover_transacao()
+    elif opcao == "3":
+        visualizar_relatorio()
+    elif opcao == "4":
+        obter_insights()
+    elif opcao == "5":
+        salvar_dados()
+    elif opcao == "6":
+        carregar_dados()                        
+    
+    # pass
+
+def adicionar_transacao():
+    transacoes = []
+    respostaInicial = input("Deseja começar com um valor inicial na sua conta? (sim/não) ")
+
+    ### LOOPAR ESSE MENU DEPOIS
     if respostaInicial.lower() == 'sim':
         while True:
             try:
@@ -44,7 +80,7 @@ def adicionar_transacao():
                     valor = float(input("Qual o valor da receita? "))
                     descricao = input("Digite a sua descrição para o valor: ")
                    
-
+                    ### LOOPAR ERRO NO VALOR
                     if valor < 0:
                         print("Valor inválido. Informe um valor positivo.")
                     else:
@@ -69,7 +105,7 @@ def adicionar_transacao():
 
                 else:
                     print("Opção inválida. Informe 1 [RECEITA] ou 2 [DESPESA].")
-
+            # ARRUMAR AQUI
             elif inserirValor == 2:
                 print("Encerrando o programa.")
                 break
@@ -110,7 +146,6 @@ def remover_transacao(transacoes):
             break
     return transacoes
 
-
 def visualizar_relatorio(transacoes):
     print("Relatório de transações:")
     subtransacaoList = transacoes[-1]
@@ -143,7 +178,14 @@ def obter_insights(subtransacaoList):
     print("Média de receitas:", media_receitas)
     print("Média de despesas:", media_despesas)
 
+def salvar_dados():
+    pass
+
+def carregar_dados():
+    pass
+
 def main():
+    inicio()
     valorTransacao = adicionar_transacao()
     remover = remover_transacao(valorTransacao)
     relatorio = visualizar_relatorio(remover)
