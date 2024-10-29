@@ -148,8 +148,7 @@ def remover_transacao(transacoes):
 
 def visualizar_relatorio(transacoes):
     print("Relatório de transações:")
-    subtransacaoList = transacoes[-1]
-    print(f"Saldo final: {subtransacaoList[-4]}")    
+    print("Saldo final: ", transacoes[-1][-4])    
     print("Receitas:")
     for transacao in transacoes:
         if transacao[0] == "RECEITA":
@@ -158,25 +157,43 @@ def visualizar_relatorio(transacoes):
     for transacao in transacoes:
         if transacao[0] == "DESPESA":
             print(f"{transacao[4]} - {transacao[2]} {transacao[3]}")
-    return subtransacaoList
+    return transacoes
 
-def obter_insights(subtransacaoList):
+def obter_insights(transacoes):
+    if not transacoes:
+        print("Nenhuma tranação disnível para analise.")
+        return
+
+    total_receitas = 0
+    total_despesas = 0
+    maior_receita = 0
+    maior_despesa = 0
+    num_receitas = 0
+    num_despesas = 0
+
+    for transacao in transacoes:
+        tipo = transacao[0]
+        valor = transacao[2]
+
+        if tipo == "RECEITA" :
+            total_receitas += valor
+            num_receitas += 1
+            if valor > maior_receita :
+                maior_receita = valor
     
-    receitas = [transacao[2] for transacao in subtransacaoList if transacao[0] == "RECEITA"]
-    despesas = [transacao[2] for transacao in subtransacaoList if transacao[0] == "DESPESA"]
-    
-    if len(receitas) > 0:
-        media_receitas = sum(receitas) / len(receitas)
-    else:
-        media_receitas = 0
-    
-    if len(despesas) > 0:
-        media_despesas = sum(despesas) / len(despesas)
-    else:
-        media_despesas = 0
-    
+        elif tipo == "DESPESA" :
+            total_despesas += valor
+            num_despesas += 1
+            if valor > maior_despesa :
+                maior_despesa = valor
+
+    media_receitas = total_receitas / num_receitas if num_receitas > 0 else 0
+    media_despesas = total_despesas / num_despesas if num_despesas > 0 else 0
+
     print("Média de receitas:", media_receitas)
     print("Média de despesas:", media_despesas)
+    print("Maior receita:", maior_receita)
+    print("Maior despesa:", maior_despesa)
 
 def salvar_dados():
     pass
