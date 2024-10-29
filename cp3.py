@@ -126,26 +126,48 @@ def visualizar_relatorio(transacoes):
     return subtransacaoList
 
 def obter_insights(subtransacaoList):
-    # Implementar insights aqui
-    # Por exemplo, calcular a média de receitas e despesas, quais categorias são mais comuns, etc.
-    # Implemente as funções necessárias para calcular insights e retornar os resultados.
-    # A função não precisa retornar nada, apenas imprimir os resultados.
+    # Separar receitas e despesas
+    receitas = [transacao[2] for transacao in subtransacaoList if transacao[0] == "RECEITA"]
+    despesas = [transacao[2] for transacao in subtransacaoList if transacao[0] == "DESPESA"]
     
-    # ## faça para eu
-    # print("Média de receitas:", sum(transacao[2] for transacao in transacoes if transacao[0] == "RECEITA") / len(transacoes))
-    # print("Média de despesas:", sum(transacao[2] for transacao in transacoes if transacao[0] == "DESPESA") / len(transacoes))
-    # print("Categorias mais comuns:")
-    # categorias = {}
-    # for transacao in transacoes:
-    #     categoria = transacao[3]
-    #     if categoria in categorias:
-    #         categorias[categoria] += 1
-    #     else:
-    #         categorias[categoria] = 1
-    # for categoria, quantidade in categorias.items():
-    #     print(f"{categoria}: {quantidade}")
-    # return None # Remover essa linha depois quando implementar os insights.
-    pass
+    # Calcular a média de receitas
+    if len(receitas) > 0:
+        media_receitas = sum(receitas) / len(receitas)
+    else:
+        media_receitas = 0
+    
+    # Calcular a média de despesas
+    if len(despesas) > 0:
+        media_despesas = sum(despesas) / len(despesas)
+    else:
+        media_despesas = 0
+    
+    print("Média de receitas:", media_receitas)
+    print("Média de despesas:", media_despesas)
+
+    # Contar a frequência de cada categoria
+    categorias = {}
+    for transacao in subtransacaoList:
+        categoria = transacao[3]
+        if categoria in categorias:
+            categorias[categoria] += 1
+        else:
+            categorias[categoria] = 1
+
+    # Encontrar a(s) categoria(s) mais comum(ns)
+    max_frequencia = -1
+    for categoria in categorias:  # Encontrar o valor máximo de frequência
+        if categorias[categoria] > max_frequencia:
+            max_frequencia = categorias[categoria]
+
+    categorias_comuns = []
+    for categoria in categorias:  # Verificar quais categorias têm a frequência máxima
+        if categorias[categoria] == max_frequencia:
+            categorias_comuns.append(categoria)
+
+    print("Categorias mais comuns:")
+    for categoria in categorias_comuns:
+        print(f"{categoria}: {categorias[categoria]}")
 
 def main():
     valorTransacao = adicionar_transacao()
