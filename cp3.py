@@ -13,21 +13,20 @@ data = agora.strftime("%d/%m/%Y %H:%M:%S")
 def inicio():
     opcao = input("\nBEM-VINDO! \n1 - Adicionar Transação\n2 - Carregar Dados\nO que você deseja?: ")
 
-    while opcao.isnumeric() == False:
+    while opcao.isnumeric() == False or (opcao != "1" and opcao != "2"):
         opcao = input("\nOpção inválida, por favor, escolha entre as seguintes opções\n1 - Adicionar Transação\n2 - Carregar Dados\nO que você deseja?: ")
+       
 
     if opcao == "1":
         adicionar_transacao()
     elif opcao == "2":
-        carregar_dados()        
+        carregar_dados()
 
-
-    # pass
 
 def menu_principal():
     opcao = input("\nBEM-VINDO! \n1 - Adicionar Transação\n2 - Remover Transação\n3 - Visualizar Relatório\n4 - Obter Insights\n5 - Salvar Dados\n6 - Carregar Dados\nO que você deseja?: ")
 
-    while opcao.isnumeric() == False:
+    while opcao.isnumeric() == False or (opcao != "1" and opcao != "2" and opcao != "3" and opcao != "4" and opcao != "5" and opcao != "6"):
         opcao = input("\nOpção inválida, por favor, escolha entre as seguintes opções\n1 - Adicionar Transação\n2 - Remover Transação\n3 - Visualizar Relatório\n4 - Obter Insights\n5 - Salvar Dados\n6 - Carregar Dados\nO que você deseja?: ")
 
     if opcao == "1":
@@ -42,12 +41,11 @@ def menu_principal():
         salvar_dados()
     elif opcao == "6":
         carregar_dados()                        
-    
-    # pass
+
 
 def adicionar_transacao():
     transacoes = []
-    respostaInicial = input("Deseja começar com um valor inicial na sua conta? (sim/não) ")
+    respostaInicial = input("\nDeseja começar com um valor inicial na sua conta? (sim/não) ")
 
     ### LOOPAR ESSE MENU DEPOIS
     if respostaInicial.lower() == 'sim':
@@ -114,7 +112,8 @@ def adicionar_transacao():
 
         except ValueError:
             print("Erro: Você não digitou um número válido.")
-    return transacoes
+    return transacoes, menu_principal()
+    
 
 def remover_transacao(transacoes):
     while True:
@@ -144,7 +143,8 @@ def remover_transacao(transacoes):
         if continuar.lower() == 'não':
             print("Encerrando a remoção de transações.")
             break
-    return transacoes
+    return transacoes, menu_principal()
+
 
 def visualizar_relatorio(transacoes):
     print("Relatório de transações:")
@@ -157,7 +157,8 @@ def visualizar_relatorio(transacoes):
     for transacao in transacoes:
         if transacao[0] == "DESPESA":
             print(f"{transacao[4]} - {transacao[2]} {transacao[3]}")
-    return transacoes
+    return transacoes, menu_principal()
+
 
 def obter_insights(transacoes):
     if not transacoes:
@@ -194,19 +195,24 @@ def obter_insights(transacoes):
     print("Média de despesas:", media_despesas)
     print("Maior receita:", maior_receita)
     print("Maior despesa:", maior_despesa)
+    menu_principal()
+
 
 def salvar_dados():
     pass
 
+
 def carregar_dados():
     pass
 
+
 def main():
     inicio()
-    valorTransacao = adicionar_transacao()
-    remover = remover_transacao(valorTransacao)
-    relatorio = visualizar_relatorio(remover)
-    insight = obter_insights(relatorio)
+    # valorTransacao = adicionar_transacao()
+    # remover = remover_transacao(valorTransacao)
+    # relatorio = visualizar_relatorio(remover)
+    # insight = obter_insights(relatorio)
+
 
 if __name__ == "__main__":
     main()
