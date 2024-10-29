@@ -9,6 +9,7 @@ from datetime import datetime
 # Obtendo a data e hora atuais
 agora = datetime.now()
 data = agora.strftime("%d/%m/%Y %H:%M:%S")
+transacoes = []
 
 def inicio():
     opcao = input("\nBEM-VINDO! \n1 - Adicionar Transação\n2 - Carregar Dados\nO que você deseja?: ")
@@ -43,76 +44,74 @@ def menu_principal():
         carregar_dados()                        
 
 
-def adicionar_transacao():
-    transacoes = []
-    respostaInicial = input("\nDeseja começar com um valor inicial na sua conta? (sim/não) ")
-
-    ### LOOPAR ESSE MENU DEPOIS
-    if respostaInicial.lower() == 'sim':
+def adicionar_transacao(transacoes):
+    if not transacoes:
+        respostaInicial = input("\nDeseja começar com um valor inicial na sua conta? (sim/não): ") 
+        if respostaInicial.lower() == 'sim':
+            while True:
+                try:
+                    valorInicial = float(input("Qual o valor inicial da sua conta?: "))
+                    if valorInicial < 0:
+                        print("Valor inicial inválido. Informe um valor positivo.")
+                    else:
+                        print(f"O valor inicial da sua conta é: {valorInicial}")
+                        break
+                except ValueError:
+                    print("Erro: Você não digitou um número válido.")
+        elif respostaInicial.lower() == 'não':
+            valorInicial = 0
+            print(f"Seu saldo atual é de: {valorInicial}")
+        else:
+            print("Resposta inválida. O programa será encerrado.")
+            return
+    
         while True:
             try:
-                valorInicial = float(input("Qual o valor inicial da sua conta? "))
-                if valorInicial < 0:
-                    print("Valor inicial inválido. Informe um valor positivo.")
-                else:
-                    print(f"O valor inicial da sua conta é: {valorInicial}")
+                inserirValor = int(input("Deseja inserir um novo valor: 1 [SIM] ou 2 [NÃO]? "))
+
+                if inserirValor == 1:
+                    respostaUsuario = int(input("Você deseja inserir uma: 1 [RECEITA] ou 2 [DESPESA]? "))
+                    
+
+                    if respostaUsuario == 1:
+                        valor = float(input("Qual o valor da receita? "))
+                        descricao = input("Digite a sua descrição para o valor: ")
+                    
+                        ### LOOPAR ERRO NO VALOR
+                        if valor < 0:
+                            print("Valor inválido. Informe um valor positivo.")
+                        else:
+                            valorInicial += valor
+                            print(f"Receita adicionada. Novo saldo: {valorInicial}\nReceita inserida foi de: {valor} {descricao} na data {data}")
+                            transacoes.append(["RECEITA",valorInicial, valor, descricao, data])
+                            print(transacoes) #remover essa linha depois
+
+                    elif respostaUsuario == 2:
+                        valor = float(input("Qual o valor da despesa? "))
+                        descricao = input("Digite a sua descrição para o valor: ")
+                        if valor < 0:
+                            print("Valor inválido. Informe um valor positivo.")
+                        elif valorInicial >= valor:
+                            valorInicial -= valor
+                            print(f"Despesa adicionada. Novo saldo: {valorInicial}\nDespesa inserida foi de: {valor} {descricao} na data {data}")
+                            transacoes.append(["DESPESA",valorInicial, valor, descricao, data])
+                            print(transacoes) #remover essa linha depois
+                        
+                        else:
+                            print("Saldo insuficiente. Transação recusada!")
+
+                    else:
+                        print("Opção inválida. Informe 1 [RECEITA] ou 2 [DESPESA].")
+                # ARRUMAR AQUI
+                elif inserirValor == 2:
+                    print("Encerrando o programa.")
                     break
+                else:
+                    print("Opção inválida. Informe 1 [SIM] ou 2 [NÃO].")
+
             except ValueError:
                 print("Erro: Você não digitou um número válido.")
-    elif respostaInicial.lower() == 'não':
-        valorInicial = 0
-        print(f"Seu saldo atual é de: {valorInicial}")
-    else:
-        print("Resposta inválida. O programa será encerrado.")
-        return
-
-    while True:
-        try:
-            inserirValor = int(input("Deseja inserir um novo valor: 1 [SIM] ou 2 [NÃO]? "))
-
-            if inserirValor == 1:
-                respostaUsuario = int(input("Você deseja inserir uma: 1 [RECEITA] ou 2 [DESPESA]? "))
-                
-
-                if respostaUsuario == 1:
-                    valor = float(input("Qual o valor da receita? "))
-                    descricao = input("Digite a sua descrição para o valor: ")
-                   
-                    ### LOOPAR ERRO NO VALOR
-                    if valor < 0:
-                        print("Valor inválido. Informe um valor positivo.")
-                    else:
-                        valorInicial += valor
-                        print(f"Receita adicionada. Novo saldo: {valorInicial}\nReceita inserida foi de: {valor} {descricao} na data {data}")
-                        transacoes.append(["RECEITA",valorInicial, valor, descricao, data])
-                        print(transacoes) #remover essa linha depois
-
-                elif respostaUsuario == 2:
-                    valor = float(input("Qual o valor da despesa? "))
-                    descricao = input("Digite a sua descrição para o valor: ")
-                    if valor < 0:
-                        print("Valor inválido. Informe um valor positivo.")
-                    elif valorInicial >= valor:
-                        valorInicial -= valor
-                        print(f"Despesa adicionada. Novo saldo: {valorInicial}\nDespesa inserida foi de: {valor} {descricao} na data {data}")
-                        transacoes.append(["DESPESA",valorInicial, valor, descricao, data])
-                        print(transacoes) #remover essa linha depois
-                    
-                    else:
-                        print("Saldo insuficiente. Transação recusada!")
-
-                else:
-                    print("Opção inválida. Informe 1 [RECEITA] ou 2 [DESPESA].")
-            # ARRUMAR AQUI
-            elif inserirValor == 2:
-                print("Encerrando o programa.")
-                break
-            else:
-                print("Opção inválida. Informe 1 [SIM] ou 2 [NÃO].")
-
-        except ValueError:
-            print("Erro: Você não digitou um número válido.")
-    return transacoes, menu_principal()
+        return transacoes, menu_principal()
     
 
 def remover_transacao(transacoes):
@@ -208,7 +207,7 @@ def carregar_dados():
 
 def main():
     inicio()
-    # valorTransacao = adicionar_transacao()
+    # valorTransacao = adicionar_transacao(transacoes)
     # remover = remover_transacao(valorTransacao)
     # relatorio = visualizar_relatorio(remover)
     # insight = obter_insights(relatorio)
@@ -216,3 +215,58 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+
+# transacoes = []
+
+# def adicionar_transacao():
+#     while not transacoes:
+        
+#         Perg_Valor_Inicial = input("\nDeseja começar com um valor inicial na sua conta?\n1 - Sim\n2 - Não")
+        
+#         while Perg_Valor_Inicial.isnumeric() == False or (Perg_Valor_Inicial != "1" and Perg_Valor_Inicial != "2"):
+#             Perg_Valor_Inicial = input("Opção inválida, por favor, escolha entre as seguintes opções\n1 - Sim\n2 - Não\nO que você deseja?: ")
+
+#         if Perg_Valor_Inicial == "1":
+#             Valor_Inicial = float(input("\nQual seria o valor inicial?: "))
+
+#             while Valor_Inicial < 0:
+#                 Valor_Inicial = float(input("\nValor inválido!\nPor favor insira um valor válido: "))
+
+#             print(f"O valor inicial da sua conta é: {Valor_Inicial}")    
+
+#         elif Perg_Valor_Inicial == "2":
+#             inicio()
+
+
+#     Perg_Valor_Novo = input("\nDeseja inserir um valor novo?\n1 - Sim\n2 - Não\nO que você deseja?: ")
+    
+#     while Perg_Valor_Novo.isnumeric() == False or (Perg_Valor_Novo != "1" and Perg_Valor_Novo != "2"):
+#         Perg_Valor_Novo = input("\nOpção inválida, por favor, escolha entre as seguintes opções\n1 - Sim\n2 - Não\nO que você deseja?: ")
+
+
+#     if Perg_Valor_Novo == "1":
+        
+#         Tipo_Valor_Novo = input("\nO que seria o valor?\n1 - Receita\n2 - Despesa\nR: ")
+        
+#         while Tipo_Valor_Novo.isnumeric() == False or (Tipo_Valor_Novo != "1" and Tipo_Valor_Novo != "2"):
+#             Perg_Valor_Novo = input("\nOpção inválida, por favor, escolha entre as seguintes opções\n1 - Receita\n2 - Despesa\nO que você deseja?: ")
+
+#         if Tipo_Valor_Novo == "1":
+            
+#             Receita_Valor_Novo = float(input("\nValor da nova receita: "))
+            
+#             while Receita_Valor_Novo < 0:
+#                 Receita_Valor_Novo = float(input("\nValor Inválido \nInsira o valor da nova receita: "))
+            
+#             Desc_Receita_Valor_Novo = input("Descrição da nova receita: ")
+
+#             Valor_Inicial += Receita_Valor_Novo
+            
+
+
+
+
+# Perg_Valor_Inicial = pergunta do valor inicial
+# Valor_Inicial = Valor inicial
+# Perg_Valor_Novo = Pergunta do Valor novo
