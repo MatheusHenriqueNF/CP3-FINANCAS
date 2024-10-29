@@ -143,28 +143,6 @@ def obter_insights(subtransacaoList):
     print("Média de receitas:", media_receitas)
     print("Média de despesas:", media_despesas)
 
-    categorias = {}
-    for transacao in subtransacaoList:
-        categoria = transacao[3]
-        if categoria in categorias:
-            categorias[categoria] += 1
-        else:
-            categorias[categoria] = 1
-
-    max_frequencia = -1
-    for categoria in categorias: 
-        if categorias[categoria] > max_frequencia:
-            max_frequencia = categorias[categoria]
-
-    categorias_comuns = []
-    for categoria in categorias: 
-        if categorias[categoria] == max_frequencia:
-            categorias_comuns.append(categoria)
-
-    print("Categorias mais comuns:")
-    for categoria in categorias_comuns:
-        print(f"{categoria}: {categorias[categoria]}")
-
 def main():
     valorTransacao = adicionar_transacao()
     remover = remover_transacao(valorTransacao)
