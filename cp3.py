@@ -126,17 +126,15 @@ def visualizar_relatorio(transacoes):
     return subtransacaoList
 
 def obter_insights(subtransacaoList):
-    # Separar receitas e despesas
+    
     receitas = [transacao[2] for transacao in subtransacaoList if transacao[0] == "RECEITA"]
     despesas = [transacao[2] for transacao in subtransacaoList if transacao[0] == "DESPESA"]
     
-    # Calcular a média de receitas
     if len(receitas) > 0:
         media_receitas = sum(receitas) / len(receitas)
     else:
         media_receitas = 0
     
-    # Calcular a média de despesas
     if len(despesas) > 0:
         media_despesas = sum(despesas) / len(despesas)
     else:
@@ -145,7 +143,6 @@ def obter_insights(subtransacaoList):
     print("Média de receitas:", media_receitas)
     print("Média de despesas:", media_despesas)
 
-    # Contar a frequência de cada categoria
     categorias = {}
     for transacao in subtransacaoList:
         categoria = transacao[3]
@@ -154,14 +151,13 @@ def obter_insights(subtransacaoList):
         else:
             categorias[categoria] = 1
 
-    # Encontrar a(s) categoria(s) mais comum(ns)
     max_frequencia = -1
-    for categoria in categorias:  # Encontrar o valor máximo de frequência
+    for categoria in categorias: 
         if categorias[categoria] > max_frequencia:
             max_frequencia = categorias[categoria]
 
     categorias_comuns = []
-    for categoria in categorias:  # Verificar quais categorias têm a frequência máxima
+    for categoria in categorias: 
         if categorias[categoria] == max_frequencia:
             categorias_comuns.append(categoria)
 
