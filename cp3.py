@@ -143,6 +143,8 @@ def obter_insights(subtransacaoList):
     print("Média de receitas:", media_receitas)
     print("Média de despesas:", media_despesas)
 
+    print("olá, mundo")
+
 def main():
     valorTransacao = adicionar_transacao()
     remover = remover_transacao(valorTransacao)
