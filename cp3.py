@@ -5,6 +5,7 @@
 #Dicionários podem ser usados para categorizar as transações e calcular totais por categoria.
 
 from datetime import datetime
+import csv
 
 # Obtendo a data e hora atuais
 agora = datetime.now()
@@ -42,7 +43,7 @@ def menu_principal(transacoes):
     elif opcao == "4":
         obter_insights(transacoes)
     elif opcao == "5":
-        salvar_dados()
+        salvar_dados(transacoes)
     elif opcao == "6":
         carregar_dados()
     elif opcao == "7":
@@ -122,14 +123,14 @@ def adicionar_transacao(transacoes):
 
                 print(f"Despesa adicionada. Novo saldo: {Valor_Inicial} \nDespesa inserida foi de: {Despesa_Valor_Novo} {Desc_Despesa_Valor_Novo} na data {data}")
                 
-                transacoes.append(["RECEITA", Valor_Inicial, Despesa_Valor_Novo, Desc_Despesa_Valor_Novo, data])
+                transacoes.append(["DESPESA", Valor_Inicial, Despesa_Valor_Novo, Desc_Despesa_Valor_Novo, data])
 
                 print(transacoes) #remover essa linha depois  
 
         elif Perg_Valor_Novo == "2":
             menu_principal(transacoes)
 
-    return transacoes, menu_principal(transacoes)
+        return transacoes, menu_principal(transacoes)
     
 
 def remover_transacao(transacoes):
@@ -216,8 +217,19 @@ def obter_insights(transacoes):
     menu_principal(transacoes)
 
 
-def salvar_dados():
-    exit()
+def salvar_dados(valores, nome_arquivo="transacoes.csv"):
+    """Salva os registros em um arquivo CSV."""
+    try:
+        with open(nome_arquivo, 'w', newline='') as arquivo:
+            escritor = csv.writer(arquivo)
+            # Escreve o cabeçalho
+            escritor.writerow(["Tipo", "Valor na conta", "Movimentacao" ,"Descricao", "Data"])
+            # Escreve cada registro
+            for registro in valores:
+                escritor.writerow(registro)
+        print(f"Registros salvos com sucesso em '{nome_arquivo}'.")
+    except Exception as e:
+        print(f"Ocorreu um erro ao salvar os registros: {e}")
 
 
 def carregar_dados():
@@ -238,75 +250,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
-
-
-###### ADICIONAR TRANSACAO ORIGINAL:
-
-# if not transacoes:
-#         respostaInicial = input("\nDeseja começar com um valor inicial na sua conta? (sim/não): ") 
-#         if respostaInicial.lower() == 'sim':
-#             while True:
-#                 try:
-#                     valorInicial = float(input("Qual o valor inicial da sua conta?: "))
-#                     if valorInicial < 0:
-#                         print("Valor inicial inválido. Informe um valor positivo.")
-#                     else:
-#                         print(f"O valor inicial da sua conta é: {valorInicial}")
-#                         break
-#                 except ValueError:
-#                     print("Erro: Você não digitou um número válido.")
-#         elif respostaInicial.lower() == 'não':
-#             valorInicial = 0
-#             print(f"Seu saldo atual é de: {valorInicial}")
-#         else:
-#             print("Resposta inválida. O programa será encerrado.")
-#             return
-    
-#         while True:
-#             try:
-#                 inserirValor = int(input("Deseja inserir um novo valor: 1 [SIM] ou 2 [NÃO]? "))
-
-#                 if inserirValor == 1:
-#                     respostaUsuario = int(input("Você deseja inserir uma: 1 [RECEITA] ou 2 [DESPESA]? "))
-                    
-
-#                     if respostaUsuario == 1:
-#                         valor = float(input("Qual o valor da receita? "))
-#                         descricao = input("Digite a sua descrição para o valor: ")
-                    
-#                         ### LOOPAR ERRO NO VALOR
-#                         if valor < 0:
-#                             print("Valor inválido. Informe um valor positivo.")
-#                         else:
-#                             valorInicial += valor
-#                             print(f"Receita adicionada. Novo saldo: {valorInicial}\nReceita inserida foi de: {valor} {descricao} na data {data}")
-#                             transacoes.append(["RECEITA",valorInicial, valor, descricao, data])
-#                             print(transacoes) #remover essa linha depois
-
-#                     elif respostaUsuario == 2:
-#                         valor = float(input("Qual o valor da despesa? "))
-#                         descricao = input("Digite a sua descrição para o valor: ")
-#                         if valor < 0:
-#                             print("Valor inválido. Informe um valor positivo.")
-#                         elif valorInicial >= valor:
-#                             valorInicial -= valor
-#                             print(f"Despesa adicionada. Novo saldo: {valorInicial}\nDespesa inserida foi de: {valor} {descricao} na data {data}")
-#                             transacoes.append(["DESPESA",valorInicial, valor, descricao, data])
-#                             print(transacoes) #remover essa linha depois
-                        
-#                         else:
-#                             print("Saldo insuficiente. Transação recusada!")
-
-#                     else:
-#                         print("Opção inválida. Informe 1 [RECEITA] ou 2 [DESPESA].")
-#                 # ARRUMAR AQUI
-#                 elif inserirValor == 2:
-#                     print("Encerrando o programa.")
-#                     break
-#                 else:
-#                     print("Opção inválida. Informe 1 [SIM] ou 2 [NÃO].")
-
-#             except ValueError:
-#                 print("Erro: Você não digitou um número válido.")
-#         return transacoes, menu_principal()
