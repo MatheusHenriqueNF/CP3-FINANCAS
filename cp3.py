@@ -12,7 +12,7 @@ data = agora.strftime("%d/%m/%Y %H:%M:%S")
 transacoes = []
 Valor_Inicial = 0
 
-def inicio(transacoes):
+def inicio():
     opcao = input("\nBEM-VINDO! \n1 - Adicionar Transação\n2 - Carregar Dados\nO que você deseja?: ")
 
     while opcao.isnumeric() == False or (opcao != "1" and opcao != "2"):
@@ -228,7 +228,7 @@ def encerrar():
 
 
 def main():
-    inicio(transacoes)
+    inicio()
     # valorTransacao = adicionar_transacao(transacoes)
     # remover = remover_transacao(valorTransacao)
     # relatorio = visualizar_relatorio(remover)
