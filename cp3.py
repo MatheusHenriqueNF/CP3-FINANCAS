@@ -10,8 +10,9 @@ from datetime import datetime
 agora = datetime.now()
 data = agora.strftime("%d/%m/%Y %H:%M:%S")
 transacoes = []
+Valor_Inicial = 0
 
-def inicio():
+def inicio(transacoes):
     opcao = input("\nBEM-VINDO! \n1 - Adicionar Transação\n2 - Carregar Dados\nO que você deseja?: ")
 
     while opcao.isnumeric() == False or (opcao != "1" and opcao != "2"):
@@ -26,7 +27,7 @@ def inicio():
         encerrar()    
 
 
-def menu_principal():
+def menu_principal(transacoes):
     opcao = input("\nBEM-VINDO! \n1 - Adicionar Transação\n2 - Remover Transação\n3 - Visualizar Relatório\n4 - Obter Insights\n5 - Salvar Dados\n6 - Carregar Dados\n7 - Encerrar Programa\n\nO que você deseja?: ")
 
     while opcao.isnumeric() == False or (opcao != "1" and opcao != "2" and opcao != "3" and opcao != "4" and opcao != "5" and opcao != "6" and opcao != "7"):
@@ -49,6 +50,7 @@ def menu_principal():
 
 
 def adicionar_transacao(transacoes):
+    global Valor_Inicial
     while not transacoes:
         
         Perg_Valor_Inicial = input("\nDeseja começar com um valor inicial na sua conta?\n1 - Sim\n2 - Não\nO que deseja?: ")
@@ -125,7 +127,7 @@ def adicionar_transacao(transacoes):
                 print(transacoes) #remover essa linha depois  
 
         elif Perg_Valor_Novo == "2":
-            menu_principal()
+            menu_principal(transacoes)
 
     return transacoes, menu_principal()
     
@@ -226,7 +228,7 @@ def encerrar():
 
 
 def main():
-    inicio()
+    inicio(transacoes)
     # valorTransacao = adicionar_transacao(transacoes)
     # remover = remover_transacao(valorTransacao)
     # relatorio = visualizar_relatorio(remover)
