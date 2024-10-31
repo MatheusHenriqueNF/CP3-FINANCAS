@@ -129,7 +129,7 @@ def adicionar_transacao(transacoes):
         elif Perg_Valor_Novo == "2":
             menu_principal(transacoes)
 
-    return transacoes, menu_principal()
+    return transacoes, menu_principal(transacoes)
     
 
 def remover_transacao(transacoes):
@@ -160,7 +160,7 @@ def remover_transacao(transacoes):
         if continuar.lower() == 'não':
             print("Encerrando a remoção de transações.")
             break
-    return transacoes, menu_principal()
+    return transacoes, menu_principal(transacoes)
 
 
 def visualizar_relatorio(transacoes):
@@ -213,7 +213,7 @@ def obter_insights(transacoes):
     print("Média de despesas:", media_despesas)
     print("Maior receita:", maior_receita)
     print("Maior despesa:", maior_despesa)
-    menu_principal()
+    menu_principal(transacoes)
 
 
 def salvar_dados():
