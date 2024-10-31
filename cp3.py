@@ -14,25 +14,23 @@ transacoes = []
 Valor_Inicial = 0
 
 def inicio():
-    opcao = input("\nBEM-VINDO! \n1 - Adicionar Transação\n2 - Carregar Dados\nO que você deseja?: ")
+    opcao = input("\nBEM-VINDO! \nNotamos que seu histórico de transação está vázio, por favor comece adicionando uma transação!\n1 - Adicionar Transação\n2 - Encerrar Programa\nO que você deseja?: ")
 
     while opcao.isnumeric() == False or (opcao != "1" and opcao != "2"):
-        opcao = input("\nOpção inválida, por favor, escolha entre as seguintes opções\n1 - Adicionar Transação\n2 - Carregar Dados\n3 - Encerrar Programa\nO que você deseja?: ")
+        opcao = input("\nOpção inválida, por favor, escolha entre as seguintes opções\n1 - Adicionar Transação\n2 - Encerrar Programa\nO que você deseja?: ")
        
 
     if opcao == "1":
         adicionar_transacao(transacoes)
     elif opcao == "2":
-        carregar_dados()
-    elif opcao == "3":
         encerrar()    
 
 
 def menu_principal(transacoes):
-    opcao = input("\nBEM-VINDO! \n1 - Adicionar Transação\n2 - Remover Transação\n3 - Visualizar Relatório\n4 - Obter Insights\n5 - Salvar Dados\n6 - Carregar Dados\n7 - Encerrar Programa\n\nO que você deseja?: ")
+    opcao = input("\nBEM-VINDO! \n1 - Adicionar Transação\n2 - Remover Transação\n3 - Visualizar Relatório\n4 - Obter Insights\n5 - Salvar Dados\n6 - Encerrar Programa\n\nO que você deseja?: ")
 
-    while opcao.isnumeric() == False or (opcao != "1" and opcao != "2" and opcao != "3" and opcao != "4" and opcao != "5" and opcao != "6" and opcao != "7"):
-        opcao = input("\nOpção inválida, por favor, escolha entre as seguintes opções\n1 - Adicionar Transação\n2 - Remover Transação\n3 - Visualizar Relatório\n4 - Obter Insights\n5 - Salvar Dados\n6 - Carregar Dados\n7 - Encerrar Programa\n\nO que você deseja?: ")
+    while opcao.isnumeric() == False or (opcao != "1" and opcao != "2" and opcao != "3" and opcao != "4" and opcao != "5" and opcao != "6"):
+        opcao = input("\nOpção inválida, por favor, escolha entre as seguintes opções\n1 - Adicionar Transação\n2 - Remover Transação\n3 - Visualizar Relatório\n4 - Obter Insights\n5 - Salvar Dados\n6 - Encerrar Programa\n\nO que você deseja?: ")
 
     if opcao == "1":
         adicionar_transacao(transacoes)
@@ -45,8 +43,6 @@ def menu_principal(transacoes):
     elif opcao == "5":
         salvar_dados(transacoes)
     elif opcao == "6":
-        carregar_dados()
-    elif opcao == "7":
         encerrar()                            
 
 
@@ -65,7 +61,7 @@ def adicionar_transacao(transacoes):
             while Valor_Inicial < 0:
                 Valor_Inicial = float(input("\nValor inválido!\nPor favor insira um valor válido: "))
 
-            print(f"O valor inicial da sua conta é: {Valor_Inicial}")
+            print(f"O valor inicial da sua conta é: R${Valor_Inicial}")
             transacoes.append(["VALOR INICIAL", Valor_Inicial, data])
 
             break    
@@ -101,11 +97,11 @@ def adicionar_transacao(transacoes):
 
                 Valor_Inicial += Receita_Valor_Novo
 
-                print(f"Receita adicionada. Novo saldo: {Valor_Inicial} \nReceita inserida foi de: {Receita_Valor_Novo} {Desc_Receita_Valor_Novo} na data {data}")
+                print(f"Receita adicionada. Novo saldo: R${Valor_Inicial} \nReceita inserida foi de: R${Receita_Valor_Novo} {Desc_Receita_Valor_Novo} na data {data}")
                 
                 transacoes.append(["RECEITA",Valor_Inicial, Receita_Valor_Novo, Desc_Receita_Valor_Novo, data])
                 
-                print(transacoes) #remover essa linha depois
+                #print(transacoes) remover essa linha depois
 
             # DESPESA
             elif Tipo_Valor_Novo == "2":
@@ -121,11 +117,11 @@ def adicionar_transacao(transacoes):
 
                 Valor_Inicial -= Despesa_Valor_Novo
 
-                print(f"Despesa adicionada. Novo saldo: {Valor_Inicial} \nDespesa inserida foi de: {Despesa_Valor_Novo} {Desc_Despesa_Valor_Novo} na data {data}")
+                print(f"Despesa adicionada. Novo saldo: R${Valor_Inicial} \nDespesa inserida foi de: R${Despesa_Valor_Novo} {Desc_Despesa_Valor_Novo} na data {data}")
                 
                 transacoes.append(["DESPESA", Valor_Inicial, Despesa_Valor_Novo, Desc_Despesa_Valor_Novo, data])
 
-                print(transacoes) #remover essa linha depois  
+                #print(transacoes) remover essa linha depois  
 
         elif Perg_Valor_Novo == "2":
             menu_principal(transacoes)
@@ -210,10 +206,10 @@ def obter_insights(transacoes):
     media_receitas = total_receitas / num_receitas if num_receitas > 0 else 0
     media_despesas = total_despesas / num_despesas if num_despesas > 0 else 0
 
-    print("Média de receitas:", media_receitas)
-    print("Média de despesas:", media_despesas)
-    print("Maior receita:", maior_receita)
-    print("Maior despesa:", maior_despesa)
+    print("Média de receitas: R$", media_receitas)
+    print("Média de despesas: R$", media_despesas)
+    print("Maior receita: R$", maior_receita)
+    print("Maior despesa: R$", maior_despesa)
     menu_principal(transacoes)
 
 
@@ -230,10 +226,6 @@ def salvar_dados(valores, nome_arquivo="transacoes.csv"):
         print(f"Registros salvos com sucesso em '{nome_arquivo}'.")
     except Exception as e:
         print(f"Ocorreu um erro ao salvar os registros: {e}")
-
-
-def carregar_dados():
-    exit()
 
 
 def encerrar():
