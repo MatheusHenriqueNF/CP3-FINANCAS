@@ -164,6 +164,7 @@ def remover_transacao(transacoes):
 
 
 def visualizar_relatorio(transacoes):
+    global Valor_Inicial
     print("Relatório de transações:")
     print("Saldo final: ", transacoes[-1][-4])    
     print("Receitas:")
@@ -174,7 +175,7 @@ def visualizar_relatorio(transacoes):
     for transacao in transacoes:
         if transacao[0] == "DESPESA":
             print(f"{transacao[4]} - {transacao[2]} {transacao[3]}")
-    return transacoes, menu_principal()
+    return transacoes, menu_principal(transacoes)
 
 
 def obter_insights(transacoes):
