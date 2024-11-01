@@ -4,50 +4,52 @@
 #um dicionário contendo tipo (receita ou despesa), valor, categoria, e data.
 #Dicionários podem ser usados para categorizar as transações e calcular totais por categoria.
 
+
+
 from datetime import datetime
 import csv
 
 # Obtendo a data e hora atuais
 agora = datetime.now()
 data = agora.strftime("%d/%m/%Y %H:%M:%S")
-transacoes = []
-Valor_Inicial = 0
 
 def inicio():
     opcao = input("\nBEM-VINDO! \nNotamos que seu histórico de transação está vázio, por favor comece adicionando uma transação!\n1 - Adicionar Transação\n2 - Encerrar Programa\nO que você deseja?: ")
+    transacoes = []
+    Valor_Inicial = 0
 
     while opcao.isnumeric() == False or (opcao != "1" and opcao != "2"):
         opcao = input("\nOpção inválida, por favor, escolha entre as seguintes opções\n1 - Adicionar Transação\n2 - Encerrar Programa\nO que você deseja?: ")
-       
 
     if opcao == "1":
-        adicionar_transacao(transacoes)
+        adicionar_transacao(Valor_Inicial, transacoes)
     elif opcao == "2":
-        encerrar()    
+        encerrar()  
+
+    return Valor_Inicial, transacoes  
 
 
-def menu_principal(transacoes):
+def menu_principal(Valor_Inicial, transacoes):
     opcao = input("\nBEM-VINDO! \n1 - Adicionar Transação\n2 - Remover Transação\n3 - Visualizar Relatório\n4 - Obter Insights\n5 - Salvar Dados\n6 - Encerrar Programa\n\nO que você deseja?: ")
 
     while opcao.isnumeric() == False or (opcao != "1" and opcao != "2" and opcao != "3" and opcao != "4" and opcao != "5" and opcao != "6"):
         opcao = input("\nOpção inválida, por favor, escolha entre as seguintes opções\n1 - Adicionar Transação\n2 - Remover Transação\n3 - Visualizar Relatório\n4 - Obter Insights\n5 - Salvar Dados\n6 - Encerrar Programa\n\nO que você deseja?: ")
 
     if opcao == "1":
-        adicionar_transacao(transacoes)
+        adicionar_transacao(Valor_Inicial, transacoes)
     elif opcao == "2":
-        remover_transacao(transacoes)
+        remover_transacao(Valor_Inicial, transacoes)
     elif opcao == "3":
-        visualizar_relatorio(transacoes)
+        visualizar_relatorio(Valor_Inicial, transacoes)
     elif opcao == "4":
-        obter_insights(transacoes)
+        obter_insights(Valor_Inicial, transacoes)
     elif opcao == "5":
         salvar_dados(transacoes)
     elif opcao == "6":
         encerrar()                            
 
 
-def adicionar_transacao(transacoes):
-    global Valor_Inicial
+def adicionar_transacao(Valor_Inicial, transacoes):
     while not transacoes:
         
         Perg_Valor_Inicial = input("\nDeseja começar com um valor inicial na sua conta?\n1 - Sim\n2 - Não\nO que deseja?: ")
@@ -124,12 +126,12 @@ def adicionar_transacao(transacoes):
                 #print(transacoes) remover essa linha depois  
 
         elif Perg_Valor_Novo == "2":
-            menu_principal(transacoes)
+            menu_principal(Valor_Inicial, transacoes)
 
-        return transacoes, menu_principal(transacoes)
+        return Valor_Inicial, transacoes, menu_principal(Valor_Inicial, transacoes)
     
 
-def remover_transacao(transacoes):
+def remover_transacao(Valor_Inicial, transacoes):
     while True:
         if not transacoes:
             print("\nNenhuma transação para remover.")
@@ -157,11 +159,10 @@ def remover_transacao(transacoes):
         if continuar.lower() == 'não':
             print("Encerrando a remoção de transações.")
             break
-    return transacoes, menu_principal(transacoes)
+    return transacoes, menu_principal(Valor_Inicial, transacoes)
 
 
-def visualizar_relatorio(transacoes):
-    global Valor_Inicial
+def visualizar_relatorio(Valor_Inicial, transacoes):
     print("Relatório de transações:")
     print("Saldo final: ", transacoes[-1][-4])    
     print("Receitas:")
@@ -172,10 +173,10 @@ def visualizar_relatorio(transacoes):
     for transacao in transacoes:
         if transacao[0] == "DESPESA":
             print(f"{transacao[4]} - {transacao[2]} {transacao[3]}")
-    return transacoes, menu_principal(transacoes)
+    return transacoes, menu_principal(Valor_Inicial, transacoes)
 
 
-def obter_insights(transacoes):
+def obter_insights(Valor_Inicial, transacoes):
     if not transacoes:
         print("Nenhuma tranação disnível para analise.")
         return
@@ -210,7 +211,7 @@ def obter_insights(transacoes):
     print("Média de despesas: R$", media_despesas)
     print("Maior receita: R$", maior_receita)
     print("Maior despesa: R$", maior_despesa)
-    menu_principal(transacoes)
+    menu_principal(Valor_Inicial, transacoes)
 
 
 def salvar_dados(valores, nome_arquivo="transacoes.csv"):
@@ -238,7 +239,6 @@ def main():
     # remover = remover_transacao(valorTransacao)
     # relatorio = visualizar_relatorio(remover)
     # insight = obter_insights(relatorio)
-
 
 if __name__ == "__main__":
     main()
