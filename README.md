@@ -13,3 +13,9 @@ Matheus Henrique Nascimento de Freitas - RM 560442
   * Introdução
 
     O intuito do projeto é desenvolver um programa capaz de ajudar os usuários a gerenciar sua finanças pessoais, ajudando os usuários com seus hábitos de gastos permitindo o registro de receitas e despesas, e gerando um relatório de suas finanças, auxiliando o usuário com sua vida financeira.
+
+Objetivo: Criar um programa para ajudar os usuários a gerenciar suas finanças pessoais.
+
+Funcionalidades: - Adicionar transações (receitas e despesas) - Visualizar o saldo atual - Gerar um relatório de transações - Categorizar transações
+
+Estruturas de Dados: Utilize listas para armazenar as transações, onde cada transação é um dicionário contendo tipo (receita ou despesa), valor, categoria, e data. Dicionários podem ser usados para categorizar as transações e calcular totais por categoria.
