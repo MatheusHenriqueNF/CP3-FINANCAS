@@ -1,6 +1,4 @@
 import csv 
-
-
                       
 def visualizar_relatorio(Valor_Inicial, transacoes):
 
@@ -88,6 +86,7 @@ def main():
     from menu import inicio
 
     inicio()
+
 
 if __name__ == "__main__":
     main()
