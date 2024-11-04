@@ -1,13 +1,6 @@
-#Funcionalidades: - Adicionar transações (receitas e despesas) - Visualizar o saldo atual - Gerar um relatório de transações - Categorizar transações
-
-#Estruturas de Dados: Utilize listas para armazenar as transações, onde cada transação é
-#um dicionário contendo tipo (receita ou despesa), valor, categoria, e data.
-#Dicionários podem ser usados para categorizar as transações e calcular totais por categoria.
-
-# from menu import inicio, menu_principal
-# from movimentacao import adicionar_transacao, remover_transacao
-
 import csv 
+
+
                       
 def visualizar_relatorio(Valor_Inicial, transacoes):
 
@@ -95,11 +88,6 @@ def main():
     from menu import inicio
 
     inicio()
-    # valorTransacao = adicionar_transacao(transacoes)
-    # remover = remover_transacao(valorTransacao)
-    # relatorio = visualizar_relatorio(remover)
-    # insight = obter_insights(relatorio)
-
 
 if __name__ == "__main__":
     main()

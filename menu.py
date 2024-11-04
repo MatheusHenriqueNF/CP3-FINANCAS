@@ -1,6 +1,3 @@
-# from movimentacao import adicionar_transacao, remover_transacao
-# from cp3 import encerrar, visualizar_relatorio, obter_insights, salvar_dados
-
 def inicio():
 
     from cp3 import encerrar
