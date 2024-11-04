@@ -1,9 +1,12 @@
-from datetime import datetime 
+from datetime import datetime
 
 agora = datetime.now()
 data = agora.strftime("%d/%m/%Y %H:%M:%S")   
 
 def adicionar_transacao(Valor_Inicial, transacoes):
+
+    from menu import menu_principal
+
     while not transacoes:
         
         Perg_Valor_Inicial = input("\nDeseja começar com um valor inicial na sua conta?\n1 - Sim\n2 - Não\nO que deseja?: ")
@@ -86,6 +89,9 @@ def adicionar_transacao(Valor_Inicial, transacoes):
     
 
 def remover_transacao(Valor_Inicial, transacoes):
+
+    from menu import menu_principal
+
     while True:
         if not transacoes:
             print("\nNenhuma transação para remover.")

@@ -4,12 +4,15 @@
 #um dicionário contendo tipo (receita ou despesa), valor, categoria, e data.
 #Dicionários podem ser usados para categorizar as transações e calcular totais por categoria.
 
-from menu import inicio, menu_principal
-from movimentacao import adicionar_transacao, remover_transacao
+# from menu import inicio, menu_principal
+# from movimentacao import adicionar_transacao, remover_transacao
 
 import csv 
                       
 def visualizar_relatorio(Valor_Inicial, transacoes):
+
+    from menu import menu_principal
+
     print("Relatório de transações:")
     print("Saldo final: ", transacoes[-1][-4])    
     print("Receitas:")
@@ -24,6 +27,9 @@ def visualizar_relatorio(Valor_Inicial, transacoes):
 
 
 def obter_insights(Valor_Inicial, transacoes):
+
+    from menu import menu_principal
+
     if not transacoes:
         print("Nenhuma transação disponível para análise.")
         return
@@ -61,7 +67,10 @@ def obter_insights(Valor_Inicial, transacoes):
     menu_principal(Valor_Inicial, transacoes)
 
 
-def salvar_dados(valores, nome_arquivo="transacoes.csv"):
+def salvar_dados(Valor_Inicial, transacoes, nome_arquivo="transacoes.csv"):
+
+    from menu import menu_principal
+
     """Salva os registros em um arquivo CSV."""
     try:
         with open(nome_arquivo, 'w', newline='') as arquivo:
@@ -69,11 +78,12 @@ def salvar_dados(valores, nome_arquivo="transacoes.csv"):
             # Escreve o cabeçalho
             escritor.writerow(["Tipo", "Valor na conta", "Movimentacao" ,"Descricao", "Data"])
             # Escreve cada registro
-            for registro in valores:
+            for registro in transacoes:
                 escritor.writerow(registro)
         print(f"Registros salvos com sucesso em '{nome_arquivo}'.")
     except Exception as e:
         print(f"Ocorreu um erro ao salvar os registros: {e}")
+    menu_principal(Valor_Inicial, transacoes)    
 
 
 def encerrar():
@@ -81,11 +91,15 @@ def encerrar():
 
 
 def main():
+
+    from menu import inicio
+
     inicio()
     # valorTransacao = adicionar_transacao(transacoes)
     # remover = remover_transacao(valorTransacao)
     # relatorio = visualizar_relatorio(remover)
     # insight = obter_insights(relatorio)
+
 
 if __name__ == "__main__":
     main()
