@@ -120,4 +120,3 @@ def remover_transacao(Valor_Inicial, transacoes):
             print("Encerrando a remoção de transações.")
             break
     return transacoes, menu_principal(Valor_Inicial, transacoes)
-
