@@ -18,4 +18,4 @@ Objetivo: Criar um programa para ajudar os usuários a gerenciar suas finanças 
 
 Funcionalidades: - Adicionar transações (receitas e despesas) - Visualizar o saldo atual - Gerar um relatório de transações - Categorizar transações
 
-Estruturas de Dados: Utilize listas para armazenar as transações, onde cada transação é um dicionário contendo tipo (receita ou despesa), valor, categoria, e data. Dicionários podem ser usados para categorizar as transações e calcular totais por categoria.
+Estruturas de Dados: Listas para armazenar as transações, onde cada transação é um dicionário contendo tipo (receita ou despesa), valor, categoria, e data.
